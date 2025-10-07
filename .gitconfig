@@ -1,0 +1,60 @@
+[core]	
+	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[push]
+	default = simple
+	autoSetupRemote = true
+[color]	
+	ui = auto
+[branch]
+	autosetuprebase = always
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+	co=checkout
+	s=status
+	ba=branch -a -v
+    fa=fetch --all
+    c=clone --recursive 
+	d=diff
+	r=remote
+	l=log --graph --decorate --pretty=oneline --abbrev-commit --date-order
+	la=log --graph --decorate --pretty=oneline --abbrev-commit --date-order --all
+	lm=log --graph --decorate --pretty=medium  --abbrev-commit --date-order
+	info=config --get remote.origin.url
+	cm=commit -m
+	a=add
+	p=pull
+	br=branch
+	co=checkout
+	cp=cherry-pick
+	pu=!git push -u origin HEAD
+	
+	# Show files ignored by git:
+ 	ign=ls-files -o -i --exclude-standard
+	
+	gl=config --global -l
+	dv=difftool -t vimdiff -y
+	se=!git rev-list --all | xargs git grep -F
+	
+	last=branch --sort=-committerdate
+	gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+[credential]
+	helper = cache
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
